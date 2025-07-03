@@ -55,10 +55,6 @@ class Fraccion(
         return "$_numerador / $_denominador es una fracción"
     }
 
-    // ============================================
-    // === Etapa 2: Suma y Resta de Fracciones
-    // ============================================
-
     operator fun plus(otra: Fraccion): Fraccion {
         val nuevoNumerador = this._numerador * otra._denominador + this._denominador * otra._numerador
         val nuevoDenominador = this._denominador * otra._denominador
@@ -68,5 +64,20 @@ class Fraccion(
     operator fun minus(otra: Fraccion): Fraccion {
         val nuevoNumerador = this._numerador * otra._denominador - this._denominador * otra._numerador
         val nuevoDenominador = this._denominador * otra._denominador
+        return Fraccion(nuevoNumerador, nuevoDenominador)
+    }
+
+    operator fun times(otra: Fraccion): Fraccion {
+        val nuevoNumerador = this._numerador * otra._numerador
+        val nuevoDenominador = this._denominador * otra._denominador
+        return Fraccion(nuevoNumerador, nuevoDenominador)
+    }
+
+    operator fun div(otra: Fraccion): Fraccion {
+        if (otra._numerador == 0) {
+            throw IllegalArgumentException("No se puede dividir por una fracción con numerador cero")
+        }
+        val nuevoNumerador = this._numerador * otra._denominador
+        val nuevoDenominador = this._denominador * otra._numerador
         return Fraccion(nuevoNumerador, nuevoDenominador)
     }
