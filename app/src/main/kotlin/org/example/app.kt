@@ -94,3 +94,71 @@ fun main() {
 
     fraccionModificable.denominador = 6
     println("Después de cambiar denominador a 6: ${fraccionModificable}")
+
+    println("\n=== PRUEBAS DE VALIDACIÓN (Etapa 4) ===")
+    try {
+        val fraccionInvalida = Fraccion(1, 0)
+    } catch (e: IllegalArgumentException) {
+        println("Error al crear fracción con denominador 0: ${e.message}")
+    }
+
+    try {
+        val f1 = Fraccion(1, 2)
+        val f2 = Fraccion(1, 1)
+        println("Intentando cambiar denominador a 0...")
+        f2.denominador = 0
+        val resultado = f1 + f2
+    } catch (e: IllegalArgumentException) {
+        println("Error capturado correctamente: ${e.message}")
+    }
+
+     // ======================================
+    // === Etapa 4: Métodos de Utilidad
+    // ======================================
+
+    fun aDecimal(): Double = _numerador.toDouble() / _denominador.toDouble()
+
+    fun esMayor(otra: Fraccion): Boolean {
+        return this.compareTo(otra) > 0
+    }
+
+    fun esMenor(otra: Fraccion): Boolean {
+        return this.compareTo(otra) < 0
+    }
+
+    // ======================================
+    // === Etapa 4: Comparaciones
+    // ======================================
+
+    operator fun compareTo(otra: Fraccion): Int {
+        val thisDecimal = this.aDecimal()
+        val otherDecimal = otra.aDecimal()
+        return when {
+            thisDecimal < otherDecimal -> -1
+            thisDecimal > otherDecimal -> 1
+            else -> 0
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Fraccion) return false
+        return _numerador == other._numerador && _denominador == other._denominador
+    }
+
+    override fun hashCode(): Int {
+        return 31 * _numerador + _denominador
+    }
+
+    // ======================================
+    // === Etapa 4: Conversión desde Decimal
+    // ======================================
+
+    companion object {
+        fun desdeDecimal(decimal: Double): Fraccion {
+            val denominador = 10000
+            val numerador = (decimal * denominador).toInt()
+            return Fraccion(numerador, denominador).apply { simplificar() }
+        }
+    }
+}
