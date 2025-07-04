@@ -6,11 +6,10 @@
 
 ## Información del Alumno
 
-**Nombre y Apellido:** [Escribir aquí tu nombre y apellido]
+**Nombre y Apellido:** Candela de la Cruz
+**Curso:** 4I
 
-**Curso:** [Escribir aquí tu curso]
-
-**Fecha de entrega:** [Escribir aquí la fecha de entrega]
+**Fecha de entrega:** viernes 4 de julio
 
 ---
 
